@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/usr/share/endeavouros/backgrounds/greenhouse.png"
+let background = "#37152f"
+let foreground = "#f5debf"
+let cursor     = "#f5debf"
+
+" Colors
+let color0  = "#37152f"
+let color1  = "#FFD57C"
+let color2  = "#7B6B87"
+let color3  = "#9D7485"
+let color4  = "#B49691"
+let color5  = "#D6A794"
+let color6  = "#EEB596"
+let color7  = "#f5debf"
+let color8  = "#ab9b85"
+let color9  = "#FFD57C"
+let color10 = "#7B6B87"
+let color11 = "#9D7485"
+let color12 = "#B49691"
+let color13 = "#D6A794"
+let color14 = "#EEB596"
+let color15 = "#f5debf"

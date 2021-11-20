@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/usr/share/endeavouros/backgrounds/greenhouse.png",
+    "alpha": "100",
+
+    "special": {
+        "background": "#37152f",
+        "foreground": "#f5debf",
+        "cursor": "#f5debf"
+    },
+    "colors": {
+        "color0": "#37152f",
+        "color1": "#FFD57C",
+        "color2": "#7B6B87",
+        "color3": "#9D7485",
+        "color4": "#B49691",
+        "color5": "#D6A794",
+        "color6": "#EEB596",
+        "color7": "#f5debf",
+        "color8": "#ab9b85",
+        "color9": "#FFD57C",
+        "color10": "#7B6B87",
+        "color11": "#9D7485",
+        "color12": "#B49691",
+        "color13": "#D6A794",
+        "color14": "#EEB596",
+        "color15": "#f5debf"
+    }
+}

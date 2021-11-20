@@ -1,0 +1,21 @@
+set $wallpaper /usr/share/endeavouros/backgrounds/greenhouse.png
+
+set $background #37152f
+set $foreground #f5debf
+
+set $color0 #37152f
+set $color1 #FFD57C
+set $color2 #7B6B87
+set $color3 #9D7485
+set $color4 #B49691
+set $color5 #D6A794
+set $color6 #EEB596
+set $color7 #f5debf
+set $color8 #ab9b85
+set $color9 #FFD57C
+set $color10 #7B6B87
+set $color11 #9D7485
+set $color12 #B49691
+set $color13 #D6A794
+set $color14 #EEB596
+set $color15 #f5debf
