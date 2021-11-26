@@ -53,8 +53,8 @@ font-1 = "mononoki Nerd Font Mono:size=10:weight=bold:antialias=false;2"
 font-2 = "siji:pixelsize=10;1"
 
 modules-left = i3
-modules-center = filesystem cpu memory date temperature xbacklight battery 
-modules-right = pulseaudio powermenu
+modules-center = filesystem cpu memory date xbacklight battery pulseaudio
+modules-right = powermenu
 
 tray-position = right
 tray-detached = true

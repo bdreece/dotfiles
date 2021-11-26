@@ -183,6 +183,8 @@ bindsym $mod+a focus parent
 # open new empty workspace
 bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace.sh
 
+# take a screenshot
+
 ## Multimedia Keys
 
 # volume
@@ -202,7 +204,7 @@ bindsym $mod+F1 exec amixer -D pulse sset Master toggle && killall -USR1 i3block
 ## App shortcuts
 # bindsym $mod+w exec /usr/bin/firefox
 # bindsym $mod+n exec /usr/bin/thunar
-bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
+bindsym Print exec "~/.config/i3/scripts/screenshot.sh"
 
 ##########################################
 # configuration for workspace behaviour: #
