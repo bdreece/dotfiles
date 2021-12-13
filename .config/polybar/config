@@ -14,8 +14,8 @@
 ;==========================================================
 
 [colors]
-background = ${xrdb:color0:#222}
-;background = #222
+;background = ${xrdb:color0:#222}
+background = #0D1215
 foreground = ${xrdb:color7:#222}
 ;foreground = #dfdfdf
 foreground-alt = ${xrdb:color7:#222}
@@ -30,7 +30,7 @@ width = 100%
 height = 27
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 10.0
 fixed-center = true
 
 background = ${colors.background}
@@ -281,7 +281,7 @@ format-charging-underline = #eeb596
 format-discharging = bat: <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = ""
+format-full-prefix = "bat: "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
@@ -356,7 +356,7 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-pseudo-transparency = false
+pseudo-transparency = true
 
 [global/wm]
 margin-top = 5

@@ -32,7 +32,7 @@ own_window yes
 own_window_class Conky
 own_window_type override
 own_window_transparent no
-own_window_colour 401836
+own_window_colour 0E151C
 own_window_argb_visual yes
 own_window_argb_value 217
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
@@ -50,8 +50,8 @@ use_xft yes
 xftalpha 0.1
 xftfont mononoki Nerd Font Mono:size=10
 color0 white
-color1 EAEAEA
-color2 FFA300
+color1 0e151c
+color2 6c879a
 color3 grey
 
 TEXT

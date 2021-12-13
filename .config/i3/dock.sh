@@ -12,5 +12,7 @@ do
   kill -9 $pid
 done
 
+nitrogen --restore
+/home/bdreece/.config/polybar/launch.sh
 conky -c "/home/bdreece/.conky/TeejeeTech/Process Panel"
 conky -c "/home/bdreece/.conky/TeejeeTech/Network Panel"

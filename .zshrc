@@ -83,6 +83,7 @@ plugins=(
   zsh-autosuggestions 
   zsh-syntax-highlighting 
   zsh-interactive-cd
+  # zsh-vi-mode
   git
   tmux
 )

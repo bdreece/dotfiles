@@ -1,28 +1,28 @@
 {
-    "wallpaper": "/usr/share/endeavouros/backgrounds/greenhouse.png",
-    "alpha": "100",
+    "wallpaper": "/usr/share/backgrounds/lofi-late-night-coffee-shop-2-1366×768.png",
+    "alpha": "80",
 
     "special": {
-        "background": "#37152f",
-        "foreground": "#f5debf",
-        "cursor": "#f5debf"
+        "background": "#0d1215",
+        "foreground": "#9bc1dd",
+        "cursor": "#9bc1dd"
     },
     "colors": {
-        "color0": "#37152f",
-        "color1": "#FFD57C",
-        "color2": "#7B6B87",
-        "color3": "#9D7485",
-        "color4": "#B49691",
-        "color5": "#D6A794",
-        "color6": "#EEB596",
-        "color7": "#f5debf",
-        "color8": "#ab9b85",
-        "color9": "#FFD57C",
-        "color10": "#7B6B87",
-        "color11": "#9D7485",
-        "color12": "#B49691",
-        "color13": "#D6A794",
-        "color14": "#EEB596",
-        "color15": "#f5debf"
+        "color0": "#0d1215",
+        "color1": "#575966",
+        "color2": "#A45A4E",
+        "color3": "#708466",
+        "color4": "#B0936C",
+        "color5": "#DBA069",
+        "color6": "#2E5399",
+        "color7": "#9bc1dd",
+        "color8": "#6c879a",
+        "color9": "#575966",
+        "color10": "#A45A4E",
+        "color11": "#708466",
+        "color12": "#B0936C",
+        "color13": "#DBA069",
+        "color14": "#2E5399",
+        "color15": "#9bc1dd"
     }
 }
