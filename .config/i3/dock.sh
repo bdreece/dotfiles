@@ -13,6 +13,7 @@ do
 done
 
 nitrogen --restore
+picom -CGb --experimental-backends
 /home/bdreece/.config/polybar/launch.sh
 conky -c "/home/bdreece/.conky/TeejeeTech/Process Panel"
 conky -c "/home/bdreece/.conky/TeejeeTech/Network Panel"

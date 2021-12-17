@@ -6,8 +6,11 @@ clear
 if [[ $(pwd) == /home/bdreece/Code/github* ]]
 then
   octofetch bdreece
-else
+elif [[ $(printenv | rg "TMUX_PANE" | awk -F% '{print $2}') == 0 ]]
+then
   bunnyfetch
+else
+  fortune -s
 fi
 
 # Path to your oh-my-zsh installation.

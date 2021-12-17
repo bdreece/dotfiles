@@ -256,7 +256,7 @@ exec --no-startup-id blueberry-tray
 
 #transparency 
 #exec --no-startup-id xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &
-exec --no-startup-id picom -CGb
+exec --no-startup-id picom -CGb --experimental-backends
 
 #networkmanager-applet
 exec --no-startup-id nm-applet
@@ -349,9 +349,9 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 ## rofi bindings fancy application menu (two bindings F9/$mod+d)
 
 bindsym $mod+d exec rofi -modi drun -show drun \
-		-config ~/.config/rofi/rofidmenu.rasi
+		-config ~/.config/rofi/rofidmenu.rasi -opacity "85"
                 
 ## rofi bindings for window menu (two bindings F10/$mod+t)
 
 bindsym $mod+t exec rofi -show window \
-		-config ~/.config/rofi/rofidmenu.rasi 
+		-config ~/.config/rofi/rofidmenu.rasi -opacity "85"
