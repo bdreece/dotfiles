@@ -12,6 +12,7 @@ do
   kill -9 $pid
 done
 
+sleep 4
 nitrogen --restore
 picom -CGb --experimental-backends
 /home/bdreece/.config/polybar/launch.sh

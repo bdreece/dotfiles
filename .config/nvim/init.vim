@@ -1,3 +1,4 @@
+scripte cp932
 syntax on
 " colorscheme ~/.vim/colors-wal.vim
 
@@ -10,7 +11,7 @@ set smarttab
 
 " Enable mouse input
 set mouse=a
-set ttymouse=sgr
+"set ttymouse=sgr
 
 " All system-wide defaults are set in $VIMRUNTIME/archlinux.vim (usually just
 " /usr/share/vim/vimfiles/archlinux.vim) and sourced by the call to :runtime
@@ -34,7 +35,7 @@ runtime! archlinux.vim
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  augroup pluginstall | autocmd VimEnter * PlugInstall --sync | source $MYVIMRC | augroup END
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -48,28 +49,41 @@ Plug 'scrooloose/nerdtree' |
 
 Plug 'christoomey/vim-tmux-navigator'
 
-"Plug 'ctrlpvim/ctrlp.vim'
-
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
 
-Plug 'ajh17/vimcompletesme'
+Plug 'dense-analysis/ale' |
+  \ Plug 'prabirshrestha/vim-lsp' |
+  \ Plug 'rhysd/vim-lsp-ale'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'p00f/godbolt.nvim'
+
 call plug#end()
 
+nmap <C-g> :Godbolt<CR>
+nnoremap <S-g> :'<.'>Godbolt<CR>
 nmap <C-n> :NERDTreeToggle<CR>
-nmap <C-s> :sh<CR>
+nmap <C-s> :terminal<CR>
 nmap <S-s> :! 
 
 nnoremap <C-f> :%s/
 
-let g:airline_theme='simple'
+let g:airline_theme='minimalist'
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_symbols.colnr = 'col:'
+let g:airline_symbols.linenr = ' ln:'
+let g:airline_symbols.maxlinenr = ' '
+let g:airline_symbols.whitespace = ' '
+
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 25
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
 let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Modified'  :'✹',
@@ -83,7 +97,10 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Clean'     :'✔︎',
                 \ 'Unknown'   :'?',
                 \ }
+let g:ale_fix_on_save = 1
 
+
+augroup nerdTree
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTreeVCS | wincmd p
 
@@ -97,6 +114,7 @@ autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') &&
 
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+augroup END
 
 if executable('clangd')
   augroup lsp_clangd
@@ -106,9 +124,45 @@ if executable('clangd')
               \ 'cmd': {server_info->['clangd']},
               \ 'whitelist': ['c', 'cpp'],
               \ })
-    autocmd FileType c setlocal omnifunc=lsp#complete
-    autocmd FileType cpp setlocal omnifunc=lsp#complete
   augroup end
 endif
 
+if executable('zls')
+  augroup lsp_zls
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'zls',
+          \ 'cmd': {server_info->['zls']},
+          \ 'whitelist': ['zig'],
+          \ })
+  augroup end
+endif
 
+let g:ale_linters = { 'cpp': ['clangd'],
+                    \ 'c': ['clangd'],
+                    \ 'python': ['pylint'],
+                    \ 'javascript': ['eslint'],
+                    \ 'json': ['eslint'],
+                    \ 'vim': ['vint'],
+                    \ 'yaml': ['yamlfix'],
+                    \}
+
+let g:ale_fixers = { 'cpp': ['clang-format', 'clangtidy'],
+                   \ 'c': ['clang-format', 'clangtidy'],
+                   \ 'python': ['pylint'],
+                   \ 'javascript': ['eslint'],
+                   \ 'json': ['eslint'],
+                   \ 'yaml': ['yamlfix'],
+                   \}
+lua << EOF
+  require("godbolt").setup({
+      c = { compiler = "cg112", options = { userArguments = "-Wall -Og", } },
+      cpp = { compiler = "g112", options = {} },
+      rust = { compiler = "r1560", options = {} },
+      -- any_additional_filetype = { compiler = ..., options = ... },
+      quickfix = {
+          enable = false, -- whether to populate the quickfix list in case of errors
+          auto_open = false -- whether to open the quickfix list if the compiler outputs errors
+      }
+})
+EOF

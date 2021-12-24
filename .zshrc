@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
-export EDITOR=vim
+export EDITOR=nvim
 
 clear
 if [[ $(pwd) == /home/bdreece/Code/github* ]]
@@ -138,4 +138,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+alias vim='/usr/bin/nvim'
 alias config='/usr/bin/git --git-dir=/home/bdreece/.cfg --work-tree=/home/bdreece'
