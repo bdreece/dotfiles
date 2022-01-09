@@ -8,7 +8,7 @@ set softtabstop=0
 set expandtab
 set shiftwidth=2
 set smarttab
-
+set makeprg=prog\ config\ debug\ build
 " Enable mouse input
 set mouse=a
 "set ttymouse=sgr
@@ -38,7 +38,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   augroup pluginstall | autocmd VimEnter * PlugInstall --sync | source $MYVIMRC | augroup END
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'dylanaraps/wal.vim'
 
@@ -65,9 +65,8 @@ call plug#end()
 nmap <C-g> :Godbolt<CR>
 nnoremap <S-g> :'<.'>Godbolt<CR>
 nmap <C-n> :NERDTreeToggle<CR>
-nmap <C-s> :terminal<CR>
-nmap <S-s> :! 
-
+nmap <C-s> :make<CR>
+nmap <S-s> :! prog run<CR> 
 nnoremap <C-f> :%s/
 
 let g:airline_theme='minimalist'
@@ -85,18 +84,6 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 25
 
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
 let g:ale_fix_on_save = 1
 
 
@@ -140,7 +127,8 @@ endif
 
 let g:ale_linters = { 'cpp': ['clangd'],
                     \ 'c': ['clangd'],
-                    \ 'python': ['pylint'],
+                    \ 'cmake': ['cmakelint'],
+                    \ 'python': ['yapf'],
                     \ 'javascript': ['eslint'],
                     \ 'json': ['eslint'],
                     \ 'vim': ['vint'],
@@ -149,10 +137,13 @@ let g:ale_linters = { 'cpp': ['clangd'],
 
 let g:ale_fixers = { 'cpp': ['clang-format', 'clangtidy'],
                    \ 'c': ['clang-format', 'clangtidy'],
-                   \ 'python': ['pylint'],
+                   \ 'cmake': ['cmakeformat'],
+                   \ 'python': ['yapf'],
+                   \ 'go': ['gofmt'],
                    \ 'javascript': ['eslint'],
                    \ 'json': ['eslint'],
                    \ 'yaml': ['yamlfix'],
+                   \ 'lua': ['luafmt'],
                    \}
 lua << EOF
   require("godbolt").setup({

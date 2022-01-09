@@ -206,8 +206,7 @@ bindsym $mod+F1 exec amixer -D pulse sset Master toggle && killall -USR1 i3block
 ## App shortcuts
 # bindsym $mod+w exec /usr/bin/firefox
 # bindsym $mod+n exec /usr/bin/thunar
-bindsym $mod+Print exec "~/.config/i3/scripts/screenshot.sh"
-
+bindsym --release Print exec scrot $HOME/Pictures/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 ##########################################
 # configuration for workspace behaviour: #
 ##########################################
@@ -264,6 +263,9 @@ exec --no-startup-id nm-applet
 # set wallpaper
 exec --no-startup-id nitrogen --restore
 #exec --no-startup-id feh --bg-fill /usr/share/endeavouros/backgrounds/endeavouros_i3.png
+
+# conky
+exec --no-startup-id ~/.conky/launch.sh
 
 #set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600

@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/Code/go/bin:$HOME/.local/go/bin:$PATH
+export GOPATH=$HOME/Code/go
 export EDITOR=nvim
 
 clear
@@ -9,8 +10,9 @@ then
 elif [[ $(printenv | rg "TMUX_PANE" | awk -F% '{print $2}') == 0 ]]
 then
   bunnyfetch
-else
-  fortune -s
+elif [[ $(printenv | rg "TMUX_PANE" | awk -F% '{print $2}') > 0 ]]
+then
+  fortune -l
 fi
 
 # Path to your oh-my-zsh installation.
@@ -138,5 +140,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-alias vim='/usr/bin/nvim'
+alias stt='/usr/bin/steam-tui'
 alias config='/usr/bin/git --git-dir=/home/bdreece/.cfg --work-tree=/home/bdreece'
