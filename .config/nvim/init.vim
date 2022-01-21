@@ -1,7 +1,7 @@
 scripte cp932
 syntax on
 " colorscheme ~/.vim/colors-wal.vim
-
+ 
 " Set tabs to 2 spaces
 set tabstop=4
 set softtabstop=0
@@ -60,17 +60,23 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'p00f/godbolt.nvim'
 
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 call plug#end()
 
 nmap <C-g> :Godbolt<CR>
 nnoremap <S-g> :'<.'>Godbolt<CR>
 nmap <C-n> :NERDTreeToggle<CR>
-nmap <C-s> :make<CR>
-nmap <S-s> :! prog run<CR> 
+nmap <C-c> :make<CR>
+nmap <C-s> :! prog run<CR> 
+nmap <C-t> :! prog test<CR>
 nnoremap <C-f> :%s/
+inoremap <c-x><c-k> <c-x><c-k>
+
+let g:python_host_prog = '/usr/bin/python'
 
 let g:airline_theme='minimalist'
-
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -85,6 +91,14 @@ let g:NERDTreeWinSize = 25
 
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
 let g:ale_fix_on_save = 1
+
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsListSnippers='<c-tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 
 
 augroup nerdTree

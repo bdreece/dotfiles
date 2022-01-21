@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/Code/go/bin:$HOME/.local/go/bin:$PATH
+export PATH=$HOME/.idea/bin:$HOME/.webstorm/bin:$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/Code/go/bin:$HOME/.local/go/bin:$HOME/.local/grails/bin:$PATH
 export GOPATH=$HOME/Code/go
 export EDITOR=nvim
 
@@ -142,3 +142,7 @@ unset __conda_setup
 
 alias stt='/usr/bin/steam-tui'
 alias config='/usr/bin/git --git-dir=/home/bdreece/.cfg --work-tree=/home/bdreece'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
