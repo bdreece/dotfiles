@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "coc-clangd": ">=0.20.1",
+    "coc-cmake": ">=0.2.0",
+    "coc-docker": ">=0.5.0",
+    "coc-eslint": ">=1.5.7",
+    "coc-go": ">=1.1.0",
+    "coc-html": ">=1.6.1",
+    "coc-java": ">=1.5.5",
+    "coc-json": ">=1.4.1",
+    "coc-python": ">=1.2.13",
+    "coc-rust-analyzer": ">=0.60.0",
+    "coc-sh": ">=0.6.1",
+    "coc-tsserver": ">=1.9.13",
+    "coc-yaml": ">=1.7.4"
+  }
+}
