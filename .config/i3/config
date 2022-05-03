@@ -85,6 +85,10 @@ bindsym Print exec scrot -F "/home/bdreece/Pictures/$(date -Iseconds).png"
 bindsym $mod+Print exec scrot -s -F "/home/bdreece/Pictures/$(date -Iseconds).png"
 
 ### Startup programs
+
+# Monitor script
+exec_always --no-startup-id ~/.screenlayout/login.sh
+
 # Nitrogen
 exec_always --no-startup-id nitrogen --restore
 

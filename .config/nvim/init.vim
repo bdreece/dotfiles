@@ -1,99 +1,56 @@
-scripte cp932
-
+" Theming settings
 syntax on
-" colorscheme ~/.vim/colors-wal.vim
+colorscheme colors-wal
+hi! VertSplit cterm=bold gui=bold
+hi! TabLineSel ctermfg=121 gui=bold guifg=Green 
+hi! TabLineFill cterm=bold gui=bold
+hi! TabLine cterm=bold gui=bold
+hi! clear LineNr
+hi! LineNr cterm=bold gui=bold
 
-" Set tabs to 2 spaces
+function TabLine()
+	let s = ''
+		for i in range(tabpagenr('$'))
+	    	" select the highlighting
+	    	if i + 1 == tabpagenr()
+	      		let s .= '%#TabLineSel#'
+	    	else
+	      		let s .= '%#TabLineFill#'
+	    	endif
+
+	    	" set the tab page number (for mouse clicks)
+	    	let s .= '%' . (i + 1) . 'T'
+
+	    	" the label is made by MyTabLabel()
+	    	let s .= ' %{TabLabel(' . (i + 1) . ')} '
+	  endfor
+
+	  " after the last tab fill with TabLineFill and reset tab page nr
+	  let s .= '%#TabLineFill#%T'
+
+	  return s
+endfunction
+
+function TabLabel(n)
+	let buflist = tabpagebuflist(a:n)
+	let winnr = tabpagewinnr(a:n)
+	let path = bufname(buflist[winnr - 1])
+    let label = fnamemodify(path, ":t")
+    return label
+endfunction
+
+" Global sets
+set splitbelow
+set splitright
 set tabstop=4
-set softtabstop=0
+set shiftwidth=4
 set expandtab
-set shiftwidth=2
 set smarttab
+set showtabline=2
+set tabline=%!TabLine() 
 set makeprg=prog\  
-" Enable mouse input
 set mouse=a
 set number
-
-"set ttymouse=sgr
-
-" All system-wide defaults are set in $VIMRUNTIME/archlinux.vim (usually just
-" /usr/share/vim/vimfiles/archlinux.vim) and sourced by the call to :runtime
-" you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vimrc), since archlinux.vim will be overwritten
-" everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing archlinux.vim since it alters the value of the
-" 'compatible' option.
-
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages.
-runtime! archlinux.vim
-
-" If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
-" Or better yet, read /usr/share/vim/vim80/vimrc_example.vim or the vim manual
-" and configure vim to your own liking!
-
-" do not load defaults if ~/.vimrc is missing
-"let skip_defaults_vim=1
-
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  augroup pluginstall | autocmd VimEnter * PlugInstall --sync | source $MYVIMRC | augroup END
-endif
-
-call plug#begin('~/.config/nvim/plugged')
-
-Plug 'dylanaraps/wal.vim'
-
-Plug 'rust-lang/rust.vim'
-
-Plug 'scrooloose/nerdtree' |
-      \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-      \ Plug 'ryanoasis/vim-devicons' |
-      \ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-Plug 'christoomey/vim-tmux-navigator'
-
-Plug 'prabirshrestha/async.vim'
-
-"Plug 'dense-analysis/ale' |
-"  \ Plug 'prabirshrestha/vim-lsp' |
-"  \ Plug 'rhysd/vim-lsp-ale'
-
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc', 'do': ':UpdateRemotePlugins' }
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'p00f/godbolt.nvim'
-
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'mlaursen/vim-react-snippets'
-
-Plug 'metakirby5/codi.vim'
-
-call plug#end()
-
-nmap <C-n> :NERDTreeToggle<CR>
-nmap <C-c> :make build<CR>
-nmap <C-x> :make run<CR>
-nmap <C-t> :make test<CR>
-nmap <C-s> :call Scratch()<CR>
-nnoremap <C-f> :%s/
-inoremap <c-x><c-k> <c-x><c-k>
-
-function! Scratch()
-    vsplit
-    noswapfile hide enew
-    setlocal buftype=nofile
-    setlocal bufhidden=hide
-    "setlocal nobuflisted
-    "lcd ~
-    file scratch
-endfunction
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -104,14 +61,86 @@ else
   set signcolumn=yes
 endif
 
+" Configure runtime
+runtime! archlinux.vim
+
+" Autoinstall VimPlug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  augroup pluginstall | autocmd VimEnter * PlugInstall --sync | source $MYVIMRC | augroup END
+endif
+
+
+" VimPlug Plugins
+call plug#begin('~/.config/nvim/plugged')
+
+Plug 'dylanaraps/wal.vim'
+
+Plug 'rust-lang/rust.vim'
+
+Plug 'evanleck/vim-svelte'
+
+Plug 'scrooloose/nerdtree' |
+      \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+      \ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'prabirshrestha/async.vim'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc', 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'metakirby5/codi.vim'
+Plug 'ryanoasis/vim-devicons'
+
+call plug#end()
+
+" Keybindings
+nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-c> :make build<CR>
+nmap <C-x> :make run<CR>
+nmap <C-t> :tabnew +term<CR>
+nmap <S-t> :split +term<CR>
+nmap <C-s> :call Scratch()<CR>
+nnoremap <C-f> :%s/
+nnoremap <C-d> :bd<CR>
+nnoremap <C-q> :wa<CR>:qa<CR>
+inoremap <c-x><c-k> <c-x><c-k>
+inoremap <Tab> <c-v><Tab>
+tnoremap <Esc> <C-\><C-n>
+
+" Custom functions
+function! Scratch()
+    tabnew
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+    execute "Codi python"
+endfunction
+
+function! DeleteBuf()
+    bd
+endfunction
+
+" Global plugin variables
 let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python'
 
+let g:webdevicons_enable_nerdtree = 1 
+
+
+let g:airline_powerline_fonts = 1
 let g:airline_theme='minimalist'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-
+let g:airline#extensions#tabline#enabled = 0 
 let g:airline_symbols.colnr = 'col:'
 let g:airline_symbols.linenr = ' ln:'
 let g:airline_symbols.maxlinenr = ' '
@@ -119,34 +148,31 @@ let g:airline_symbols.whitespace = ' '
 
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 25
-
+let g:NERDTreeAutoDeleteBuffer=1
+"let g:NERDTreeStatusline = '%#NonText#'
+let g:NERDTreeStatusline = ''
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
-"let g:ale_fix_on_save = 1
 
-let g:UltiSnipsSnippetDirectories=[
-      \ $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips',
-      \ $HOME.'/.config/nvim/plugged/vim-react-snippets/UltiSnips']
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsListSnippers='<c-tab>'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-
+" Autocommand Groups
 augroup nerdTree
-" Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTreeVCS | wincmd p
+    autocmd!
+	" Start NERDTree and put the cursor back in the other window.
+	"autocmd VimEnter * NERDTreeVCS | wincmd p
 
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 &&
+	" Exit Vim if NERDTree is the only window remaining in the only remaining tab.
+	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 &&
       \ exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-" Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') &&
-      \ b:NERDTree.isTabTree() | quit | endif
+    " Close the tab if NERDTree is the only window remaining in it.
+	autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-" Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+	" Open the existing NERDTree on each new tab.
+	"autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+augroup END
+
+augroup cocFormat
+    autocmd!
+    autocmd BufWritePre * | call CocActionAsync('format')
 augroup END
 
 if executable('clangd')
@@ -160,48 +186,17 @@ if executable('clangd')
   augroup end
 endif
 
-if executable('zls')
-  augroup lsp_zls
+augroup python_tabs
     autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'zls',
-          \ 'cmd': {server_info->['zls']},
-          \ 'whitelist': ['zig'],
-          \ })
-  augroup end
-endif
+    autocmd Filetype python setlocal noexpandtab | setlocal preserveindent
+augroup end
 
-"let g:ale_linters = { 'cpp': ['clangd'],
-"                    \ 'c': ['clangd'],
-"                    \ 'cmake': ['cmakelint'],
-"                    \ 'python': ['yapf'],
-"                    \ 'javascript': ['eslint'],
-"                    \ 'json': ['eslint'],
-"                    \ 'vim': ['vint'],
-"                    \ 'yaml': ['yamlfix'],
-"                    \ 'rust': ['rustc'],
-"                    \}
-"
-"let g:ale_fixers = { 'cpp': ['clang-format', 'clangtidy'],
-"                   \ 'c': ['clang-format', 'clangtidy'],
-"                   \ 'cmake': ['cmakeformat'],
-"                   \ 'python': ['yapf'],
-"                   \ 'go': ['gofmt'],
-"                   \ 'javascript': ['eslint'],
-"                   \ 'json': ['eslint'],
-"                   \ 'yaml': ['yamlfix'],
-"                   \ 'lua': ['luafmt'],
-"                   \ 'rust': ['rustfmt'],
-"                   \}
-lua << EOF
-  require("godbolt").setup({
-      c = { compiler = "cg112", options = { userArguments = "-Wall -Og", } },
-      cpp = { compiler = "g112", options = {} },
-      rust = { compiler = "r1560", options = {} },
-      -- any_additional_filetype = { compiler = ..., options = ... },
-      quickfix = {
-          enable = false, -- whether to populate the quickfix list in case of errors
-          auto_open = false -- whether to open the quickfix list if the compiler outputs errors
-      }
-})
-EOF
+augroup scratch_buffer_exit
+    autocmd!
+    autocmd BufWinLeave scratch call DeleteBuf()
+augroup end
+
+augroup term_nums
+	autocmd!
+    autocmd TermOpen * setlocal nonumber | setlocal statusline=""
+augroup end

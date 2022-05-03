@@ -1,0 +1,21 @@
+---
+data:
+  Emergency: []
+  Urgent:
+    - Apply for more jobs
+  High:
+    - Make Trackmania tracks
+    - Talk to Byron about project
+    - Start packing up
+    - Deal with truck brakes
+  Medium:
+    - Fix coc formatting issues
+    - Fix CloudAtCost NGINX configuration
+    - Implement scoped authentication for tinybroker
+  Routine:
+    - Go grocery shopping
+  Deferred:
+    - Fix OpenGL errors in bdreece/conway
+    - Learn Node.js
+    - Learn more about OpenGL
+    - Learn Clojure

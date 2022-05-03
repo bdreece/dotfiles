@@ -1,17 +1,30 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$PATH:/usr/local/go/bin:$HOME/.local/bin:$HOME/Code/go/bin
+# Environment variables
+export PATH=$PATH:/usr/local/go/bin:$HOME/.local/bin
+export PATH=$PATH:$HOME/Code/go/bin:/opt/flutter/bin:$HOME/.cargo-target/release
+export PATH=$PATH:"$HOME/.wine/drive_c/Program Files/Image-Line/FL Studio 20"
 export GOPATH=$HOME/Code/go
-export GOROOT=/usr/local/go
+export CHROME_EXECUTABLE=$(which vivaldi-stable)
+export CMAKE_GENERATOR=Ninja
 export EDITOR=nvim
+export TERM=linux
 
 clear
 if [[ $(printenv | rg "TMUX_PANE" | awk -F% '{print $2}') == 0 ]]
 then
-  pfetch | lolcat
+  	pfetch | lolcat
+	errands ls -o random -c 5
 elif [[ $(printenv | rg "TMUX_PANE" | awk -F% '{print $2}') > 0 ]]
 then
-  fortune | cowsay | lolcat
+    if [ -d ".git" ]
+    then
+        octofetch bdreece -c $HOME/.config/octofetch/config.json
+    else
+  		fortune /usr/share/fortune/definitions | cowsay | lolcat
+    fi
+	echo ""
+	errands ls -o random -c 5
 fi
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/bdreece/.oh-my-zsh"
@@ -120,8 +133,21 @@ source $HOME/.cargo/env
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias t="touch"
+alias m="mkdir -p"
+alias c="clear"
+alias grep="rg --ignore-vcs"
 alias ls="exa"
 alias ll="exa -lah"
-alias l="exa -lah"
-alias config='/usr/bin/git --git-dir=/home/bdreece/.cfg --work-tree=/home/bdreece'
+alias l="exa -lh"
+alias lg="exa -lh --git --git-ignore"
+alias llg="exa -lah --git --git-ignore"
+alias tree="exa -lah --tree"
 alias vim="nvim"
+alias svim="nvim -c 'call Scratch()'"
+alias man="man -P most"
+alias config='/usr/bin/git --git-dir=/home/bdreece/.cfg --work-tree=/home/bdreece'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
