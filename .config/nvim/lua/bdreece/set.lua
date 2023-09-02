@@ -24,8 +24,15 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
+vim.g.netrw_altv = 1
+vim.g.netrw_alto = 1
+vim.g.netrw_winsize = 75
+vim.g.netrw_banner = 0
